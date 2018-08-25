@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     // MARK: - Properties
+    let calcul = Calculator()
     var stringNumbers: [String] = [String()]
     var operators: [String] = ["+"]
     var index = 0
@@ -37,7 +38,7 @@ class ViewController: UIViewController {
             if stringNumber.isEmpty {
                 let alertVC = UIAlertController(title: "Zéro!", message: "Expression incorrecte !", preferredStyle: .alert)
                 alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                alertVC.present(alertVC, animated: true, completion: nil)
+                self.present(alertVC, animated: true, completion: nil)
                 return false
             }
         }
@@ -76,30 +77,23 @@ class ViewController: UIViewController {
     }
 
     @IBAction func equal() {
-        calculateTotal()
+        if !isExpressionCorrect {
+            return
+        }
+        calcul.calculateTotal(of: stringNumbers, with: operators)
+        textView.text = textView.text + "=\(calcul.total)"
+        clear()
     }
     
     // MARK: - Methods
     
-    func calculateTotal() {
-        if !isExpressionCorrect {
-            return
+    func addNewNumber(_ newNumber: Int) {
+        if let stringNumber = stringNumbers.last {
+            var stringNumberMutable = stringNumber
+            stringNumberMutable += "\(newNumber)"
+            stringNumbers[stringNumbers.count-1] = stringNumberMutable
         }
-        
-        var total = 0
-        for (i, stringNumber) in stringNumbers.enumerated() {
-            if let number = Int(stringNumber) {
-                if operators[i] == "+" {
-                    total += number
-                } else if operators[i] == "-" {
-                    total -= number
-                }
-            }
-        }
-        
-        textView.text = textView.text + "=\(total)"
-        
-        clear()
+        updateDisplay()
     }
     
     func updateDisplay() {
@@ -114,15 +108,6 @@ class ViewController: UIViewController {
         }
         textView.text = text
     }
-    func addNewNumber(_ newNumber: Int) {
-        if let stringNumber = stringNumbers.last {
-            var stringNumberMutable = stringNumber
-            stringNumberMutable += "\(newNumber)"
-            stringNumbers[stringNumbers.count-1] = stringNumberMutable
-        }
-        updateDisplay()
-    }
-    
     
     func clear() {
         stringNumbers = [String()]

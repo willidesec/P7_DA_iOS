@@ -11,8 +11,18 @@ import UIKit
 
 class Calculator {
     
-
+    var total = 0
     
-    
-    
+    func calculateTotal(of stringNumbers: [String], with operators: [String]) {
+        total = 0
+        for (i, stringNumber) in stringNumbers.enumerated() {
+            if let number = Int(stringNumber) {
+                if operators[i] == "+" {
+                    total += number
+                } else if operators[i] == "-" {
+                    total -= number
+                }
+            }
+        }
+    }
 }
