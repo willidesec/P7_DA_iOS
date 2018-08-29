@@ -12,35 +12,7 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     let operation = Calculator()
-    var isExpressionCorrect: Bool {
-        if let stringNumber = operation.stringNumbers.last {
-            if stringNumber.isEmpty {
-                if operation.stringNumbers.count == 1 {
-                    let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertVC, animated: true, completion: nil)
-                } else {
-                    let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertVC, animated: true, completion: nil)
-                }
-                return false
-            }
-        }
-        return true
-    }
-    
-    var canAddOperator: Bool {
-        if let stringNumber = operation.stringNumbers.last {
-            if stringNumber.isEmpty {
-                let alertVC = UIAlertController(title: "Zéro!", message: "Expression incorrecte !", preferredStyle: .alert)
-                alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.present(alertVC, animated: true, completion: nil)
-                return false
-            }
-        }
-        return true
-    }
+
 
     // MARK: - Outlets
     @IBOutlet weak var textView: UITextView!
@@ -54,28 +26,26 @@ class ViewController: UIViewController {
             }
         }
     }
-
-    @IBAction func plus() {
-        if canAddOperator {
-        	operation.operators.append("+")
-        	operation.stringNumbers.append("")
-            textView.text = operation.updateDisplay()
+    
+    @IBAction func tappedOperationButton(_ sender: UIButton) {
+        operation.alertDelegate = self
+        guard let buttonTitle = sender.currentTitle else { return }
+        if buttonTitle == "=" {
+            if !operation.isExpressionCorrect {
+                return
+            }
+            textView.text = textView.text + "=\(operation.calculateTotal())"
+        } else {
+            textView.text = operation.addNewOperator(buttonTitle)
         }
     }
 
-    @IBAction func minus() {
-        if canAddOperator {
-            operation.operators.append("-")
-            operation.stringNumbers.append("")
-            textView.text = operation.updateDisplay()
-        }
-    }
+}
 
-    @IBAction func equal() {
-        if !isExpressionCorrect {
-            return
-        }
-        textView.text = textView.text + "=\(operation.calculateTotal())"
+extension ViewController: AlertControllerDelegate {
+    func displayAlert(message: String) {
+        let alertVC = UIAlertController(title: "Zéro!", message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
-
 }
