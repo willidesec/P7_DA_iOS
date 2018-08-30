@@ -17,15 +17,16 @@ class Calculator {
     // MARK: - Properties
     public var alertDelegate: AlertControllerDelegate!
     fileprivate var total = 0
-    fileprivate var stringNumbers: [String] = [String()]
-    fileprivate var operators: [String] = ["+"]
+    public var stringNumbers: [String] = [String()]
+    public var operators: [String] = ["+"]
     public var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
+                guard let alerteDelegate = alertDelegate else { return  false }
                 if stringNumbers.count == 1 {
-                    alertDelegate.displayAlert(message: "Démarrez un nouveau calcul !")
+                    alerteDelegate.displayAlert(message: "Démarrez un nouveau calcul !")
                 } else {
-                    alertDelegate.displayAlert(message: "Entrez une expression correcte !")
+                    alerteDelegate.displayAlert(message: "Entrez une expression correcte !")
                 }
                 return false
             }
@@ -33,10 +34,11 @@ class Calculator {
         return true
     }
     
-    fileprivate var canAddOperator: Bool {
+    public var canAddOperator: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
-                alertDelegate.displayAlert(message: "Expression incorrecte !")
+                guard let alerteDelegate = alertDelegate else { return  false }
+                alerteDelegate.displayAlert(message: "Expression incorrecte !")
                 return false
             }
         }
