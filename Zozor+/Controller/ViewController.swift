@@ -39,7 +39,12 @@ class ViewController: UIViewController {
             textView.text = operation.addNewOperator(buttonTitle)
         }
     }
-
+    
+    @IBAction func tappedAddMemoryButton() {
+        operation.memory = operation.addResultToMemory(operation.total)
+        print(operation.memory)
+    }
+    
 }
 
 extension ViewController: AlertControllerDelegate {

@@ -22,19 +22,21 @@ class CalculatorTestCase: XCTestCase {
         super.tearDown()
     }
     
+    func addOperation(_ number1: Int, _ operationSign: String, _ number2: Int) {
+        _ = operation.addNewNumber(number1)
+        _ = operation.addNewOperator(operationSign)
+        _ = operation.addNewNumber(number2)
+    }
+    
     func testGivenOnePlusOne_WhenCalculateTotal_ThenTotalIsTwo() {
-        _ = operation.addNewNumber(1)
-        _ = operation.addNewOperator("+")
-        _ = operation.addNewNumber(1)
+        addOperation(1, "+", 1)
         
         XCTAssertTrue(operation.isExpressionCorrect)
         XCTAssertEqual(operation.calculateTotal(), 2)
     }
     
     func testGivenTwoMinusOne_WhenCalculateTotal_ThenTotalIsOne() {
-        _ = operation.addNewNumber(2)
-        _ = operation.addNewOperator("-")
-        _ = operation.addNewNumber(1)
+        addOperation(2, "-", 1)
         
         XCTAssertEqual(operation.calculateTotal(), 1)
     }
@@ -54,6 +56,16 @@ class CalculatorTestCase: XCTestCase {
         XCTAssertFalse(operation.isExpressionCorrect)
     }
     
+    // Bonus
+    
+    func testGivenAResult_WhenAddingResultToMemory_ThenTotalIsKeepInMemory() {
+        addOperation(2, "+", 1)
+        let result = operation.calculateTotal()
+        
+        operation.memory = operation.addResultToMemory(result)
+        
+        XCTAssertEqual(operation.memory, 3)
+    }
     
 
     

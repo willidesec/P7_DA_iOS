@@ -16,9 +16,10 @@ protocol AlertControllerDelegate {
 class Calculator {
     // MARK: - Properties
     public var alertDelegate: AlertControllerDelegate!
-    fileprivate var total = 0
+    public var total = 0
     public var stringNumbers: [String] = [String()]
     public var operators: [String] = ["+"]
+    public var memory = 0
     public var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
@@ -97,4 +98,11 @@ class Calculator {
         stringNumbers = [String()]
         operators = ["+"]
     }
+    
+    // Bonus
+    public func addResultToMemory(_ result: Int) -> Int {
+        memory = result
+        return memory
+    }
+
 }
