@@ -12,11 +12,27 @@ class ViewController: UIViewController {
     
     // MARK: - Properties
     let operation = Calculator()
+    var memoryLabel = UILabel()
 
 
     // MARK: - Outlets
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
+    
+    // MARK: - viewDidLoad()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        memoryLabel.frame = CGRect(x: 5, y: textView.frame.height - 50, width: textView.frame.width - 20, height: 50)
+        memoryLabel.textColor = .white
+        memoryLabel.textAlignment = .left
+        memoryLabel.font = UIFont.systemFont(ofSize: 30)
+        memoryLabel.adjustsFontSizeToFitWidth = true
+        self.textView.addSubview(memoryLabel)
+    }
+    
 
     // MARK: - Action
     @IBAction func tappedNumberButton(_ sender: UIButton) {
@@ -41,8 +57,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedAddMemoryButton() {
-        operation.memory = operation.addResultToMemory(operation.total)
-        print(operation.memory)
+        memoryLabel.text = "Memory = \(operation.addResultToMemory(operation.total))"
     }
     
 }
