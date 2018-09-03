@@ -101,9 +101,13 @@ class Calculator {
     }
     
     // Bonus
-    public func addResultToMemory(_ result: Int) -> Int {
+    public func addResultToMemory(_ result: Int) -> String {
         memory = result
-        return memory
+        return String(memory)
+    }
+    
+    public func addMemoryToOperation() -> String {
+        return addNewNumber(memory)
     }
 
 }

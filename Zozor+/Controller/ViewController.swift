@@ -69,9 +69,15 @@ class ViewController: UIViewController {
         }
     }
     
+    // Bonus
     @IBAction func tappedAddMemoryButton() {
         memoryLabel.text = "Memory = \(operation.addResultToMemory(operation.total))"
     }
+    
+    @IBAction func tappedMemoryButton() {
+        textView.text = operation.addMemoryToOperation()
+    }
+    
     
 }
 
