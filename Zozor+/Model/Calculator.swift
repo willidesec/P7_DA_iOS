@@ -15,7 +15,7 @@ protocol AlertControllerDelegate {
 
 class Calculator {
     // MARK: - Properties
-    public var alertDelegate: AlertControllerDelegate!
+    public var alertDelegate: AlertControllerDelegate?
     public var total = 0
     public var stringNumbers: [String] = [String()]
     public var operators: [String] = ["+"]
@@ -23,11 +23,10 @@ class Calculator {
     public var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
-                guard let alerteDelegate = alertDelegate else { return  false }
                 if stringNumbers.count == 1 {
-                    alerteDelegate.displayAlert(message: "Démarrez un nouveau calcul !")
+                    alertDelegate?.displayAlert(message: "Démarrez un nouveau calcul !")
                 } else {
-                    alerteDelegate.displayAlert(message: "Entrez une expression correcte !")
+                    alertDelegate?.displayAlert(message: "Entrez une expression correcte !")
                 }
                 return false
             }
@@ -38,8 +37,7 @@ class Calculator {
     public var canAddOperator: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
-                guard let alerteDelegate = alertDelegate else { return  false }
-                alerteDelegate.displayAlert(message: "Expression incorrecte !")
+                alertDelegate?.displayAlert(message: "Expression incorrecte !")
                 return false
             }
         }
@@ -66,7 +64,10 @@ class Calculator {
         return text
     }
     
-    public func calculateTotal() -> Int {
+    public func calculateTotal() -> String {
+        if !isExpressionCorrect {
+            return ""
+        }
         total = 0
         for (i, stringNumber) in stringNumbers.enumerated() {
             if let number = Int(stringNumber) {
@@ -78,7 +79,7 @@ class Calculator {
             }
         }
         clear()
-        return total
+        return String(total)
     }
     
     fileprivate func updateDisplay() -> String {

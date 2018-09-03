@@ -28,44 +28,65 @@ class CalculatorTestCase: XCTestCase {
         _ = operation.addNewNumber(number2)
     }
     
-    func testGivenOnePlusOne_WhenCalculateTotal_ThenTotalIsTwo() {
-        addOperation(1, "+", 1)
-        
+//    func testGivenOnePlusOne_WhenCalculateTotal_ThenTotalIsTwo() {
+//        addOperation(1, "+", 1)
+//
+//        XCTAssertTrue(operation.isExpressionCorrect)
+//        XCTAssertEqual(operation.calculateTotal(), 2)
+//    }
+//
+//    func testGivenTwoMinusOne_WhenCalculateTotal_ThenTotalIsOne() {
+//        addOperation(2, "-", 1)
+//
+//        XCTAssertEqual(operation.calculateTotal(), 1)
+//    }
+//
+//    func testGivenNoNumberAdd_WhenAddingOperatorSign_ThenCantAddOperatorSign() {
+//        _ = operation.addNewOperator("+")
+//        guard let stringNumber = operation.stringNumbers.last else { return }
+//
+//        XCTAssertFalse(operation.canAddOperator)
+//        XCTAssertTrue(stringNumber.isEmpty)
+//    }
+//
+//    func testGivenNoNumberTapped_WhenEqualButtonIsTapped_ThenAlertIsDisplay() {
+//        _ = operation.calculateTotal()
+//
+//        XCTAssertEqual(operation.stringNumbers.count, 1)
+//        XCTAssertFalse(operation.isExpressionCorrect)
+//    }
+    
+    func testGivenIsExpressionCorrect_WhenCheckBoolExpression_ThenAddString() {
+        _ = operation.addNewNumber(1)
         XCTAssertTrue(operation.isExpressionCorrect)
-        XCTAssertEqual(operation.calculateTotal(), 2)
-    }
-    
-    func testGivenTwoMinusOne_WhenCalculateTotal_ThenTotalIsOne() {
-        addOperation(2, "-", 1)
         
-        XCTAssertEqual(operation.calculateTotal(), 1)
     }
     
-    func testGivenNoNumberAdd_WhenAddingOperatorSign_ThenCantAddOperatorSign() {
+    func testGivenIsExpressionCorrect_WhenExpressionIsNotCorrect_ThenExpressionReturnFalse() {
+        _ = operation.addNewNumber(1)
         _ = operation.addNewOperator("+")
-        guard let stringNumber = operation.stringNumbers.last else { return }
-
-        XCTAssertFalse(operation.canAddOperator)
-        XCTAssertTrue(stringNumber.isEmpty)
-    }
-    
-    func testGivenNoNumberTapped_WhenEqualButtonIsTapped_ThenAlertIsDisplay() {
         _ = operation.calculateTotal()
         
-        XCTAssertEqual(operation.stringNumbers.count, 1)
         XCTAssertFalse(operation.isExpressionCorrect)
     }
     
+    func testGivenIsExpressionCorrect_WhenStringNumbersContainsNothing_ThenExpressionReturnFalse() {
+        _ = operation.addNewOperator("+")
+        
+        XCTAssertFalse(operation.isExpressionCorrect)
+    }
+    
+
     // Bonus
     
-    func testGivenAResult_WhenAddingResultToMemory_ThenTotalIsKeepInMemory() {
-        addOperation(2, "+", 1)
-        let result = operation.calculateTotal()
-        
-        operation.memory = operation.addResultToMemory(result)
-        
-        XCTAssertEqual(operation.memory, 3)
-    }
+//    func testGivenAResult_WhenAddingResultToMemory_ThenTotalIsKeepInMemory() {
+//        addOperation(2, "+", 1)
+//        let result = operation.calculateTotal()
+//
+//        operation.memory = operation.addResultToMemory(result)
+//
+//        XCTAssertEqual(operation.memory, 3)
+//    }
     
 
     

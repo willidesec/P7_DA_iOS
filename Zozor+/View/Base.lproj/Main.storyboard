@@ -19,16 +19,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="1+1=2" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="CT0-fb-Raf">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="39z-0I-OFq" userLabel="Calcul View">
                                 <rect key="frame" x="16" y="20" width="343" height="257"/>
-                                <color key="backgroundColor" red="0.24527746819999999" green="0.53481305040000005" blue="0.58749136739999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="1+1=2" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="CT0-fb-Raf">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="257"/>
+                                        <color key="backgroundColor" red="0.24527746819999999" green="0.53481305040000005" blue="0.58749136739999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="CT0-fb-Raf" secondAttribute="height" multiplier="343:257" id="PpJ-NN-28W"/>
+                                    <constraint firstItem="CT0-fb-Raf" firstAttribute="leading" secondItem="39z-0I-OFq" secondAttribute="leading" id="5LL-eM-iTt"/>
+                                    <constraint firstItem="CT0-fb-Raf" firstAttribute="top" secondItem="39z-0I-OFq" secondAttribute="top" id="8ft-lJ-3Nz"/>
+                                    <constraint firstAttribute="trailing" secondItem="CT0-fb-Raf" secondAttribute="trailing" id="NHf-hW-gQU"/>
+                                    <constraint firstAttribute="bottom" secondItem="CT0-fb-Raf" secondAttribute="bottom" id="Pp3-lv-kjW"/>
+                                    <constraint firstAttribute="width" secondItem="39z-0I-OFq" secondAttribute="height" multiplier="343:257" id="ZxA-Hl-83C"/>
                                 </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="aiF-me-Far">
                                 <rect key="frame" x="16" y="297" width="343" height="206"/>
                                 <subviews>
@@ -214,19 +224,20 @@
                         </subviews>
                         <color key="backgroundColor" red="0.875366885359116" green="0.84808511391900776" blue="0.83804947389843787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="CT0-fb-Raf" firstAttribute="top" secondItem="rYY-74-45Q" secondAttribute="top" id="2EO-Rz-Hvo"/>
+                            <constraint firstItem="39z-0I-OFq" firstAttribute="leading" secondItem="rYY-74-45Q" secondAttribute="leading" constant="16" id="8qe-1X-9CP"/>
+                            <constraint firstItem="aiF-me-Far" firstAttribute="top" secondItem="39z-0I-OFq" secondAttribute="bottom" constant="20" id="8yd-df-HPH"/>
                             <constraint firstItem="JCS-G8-93l" firstAttribute="leading" secondItem="rYY-74-45Q" secondAttribute="leading" constant="16" id="EXu-fJ-oNx"/>
-                            <constraint firstItem="aiF-me-Far" firstAttribute="top" secondItem="CT0-fb-Raf" secondAttribute="bottom" constant="20" id="IM3-lX-23y"/>
-                            <constraint firstItem="CT0-fb-Raf" firstAttribute="leading" secondItem="rYY-74-45Q" secondAttribute="leading" constant="16" id="QHv-cT-co3"/>
+                            <constraint firstAttribute="trailing" secondItem="39z-0I-OFq" secondAttribute="trailing" constant="16" id="HSf-dt-10D"/>
                             <constraint firstItem="rYY-74-45Q" firstAttribute="trailing" secondItem="aiF-me-Far" secondAttribute="trailing" constant="16" id="ZBk-sN-dtX"/>
+                            <constraint firstItem="39z-0I-OFq" firstAttribute="top" secondItem="rYY-74-45Q" secondAttribute="top" id="csA-7J-PUH"/>
                             <constraint firstItem="aiF-me-Far" firstAttribute="leading" secondItem="rYY-74-45Q" secondAttribute="leading" constant="16" id="fir-hU-Mhu"/>
                             <constraint firstItem="rYY-74-45Q" firstAttribute="trailing" secondItem="JCS-G8-93l" secondAttribute="trailing" constant="16" id="n64-eX-AsK"/>
-                            <constraint firstItem="rYY-74-45Q" firstAttribute="trailing" secondItem="CT0-fb-Raf" secondAttribute="trailing" constant="16" id="ocr-BZ-fcb"/>
                             <constraint firstItem="rYY-74-45Q" firstAttribute="bottom" secondItem="JCS-G8-93l" secondAttribute="bottom" constant="12" id="wcL-lV-ocp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rYY-74-45Q"/>
                     </view>
                     <connections>
+                        <outlet property="calculView" destination="39z-0I-OFq" id="GSi-bN-BLK"/>
                         <outlet property="textView" destination="CT0-fb-Raf" id="Xeg-bt-oOS"/>
                         <outletCollection property="numberButtons" destination="GgJ-QU-2gW" collectionClass="NSMutableArray" id="xg1-bM-BUg"/>
                         <outletCollection property="numberButtons" destination="6uw-jf-qlX" collectionClass="NSMutableArray" id="cbB-Od-gjW"/>

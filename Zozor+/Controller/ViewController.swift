@@ -26,22 +26,23 @@ class ViewController: UIViewController {
     
     //MARK: - Methods
     fileprivate func setUpLayout() {
-        memoryLabel.bottomAnchor.constraint(equalTo: textView.bottomAnchor, constant: textView.frame.height - 10).isActive = true
-        memoryLabel.leftAnchor.constraint(equalTo: textView.leftAnchor, constant: 5).isActive = true
+        memoryLabel.bottomAnchor.constraint(equalTo: calculView.bottomAnchor, constant: 0).isActive = true
+        memoryLabel.leftAnchor.constraint(equalTo: calculView.leftAnchor, constant: 5).isActive = true
+        memoryLabel.rightAnchor.constraint(equalTo: calculView.rightAnchor, constant: 5).isActive = true
         memoryLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        memoryLabel.widthAnchor.constraint(equalToConstant: textView.frame.width - 20).isActive = true
     }
 
 
     // MARK: - Outlets
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
+    @IBOutlet weak var calculView: UIView!
     
     // MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.textView.addSubview(memoryLabel)
+        calculView.addSubview(memoryLabel)
         setUpLayout()
     }
     
@@ -59,9 +60,9 @@ class ViewController: UIViewController {
         operation.alertDelegate = self
         guard let buttonTitle = sender.currentTitle else { return }
         if buttonTitle == "=" {
-            if !operation.isExpressionCorrect {
-                return
-            }
+//            if !operation.isExpressionCorrect {
+//                return
+//            }
             textView.text = textView.text + "=\(operation.calculateTotal())"
         } else {
             textView.text = operation.addNewOperator(buttonTitle)
