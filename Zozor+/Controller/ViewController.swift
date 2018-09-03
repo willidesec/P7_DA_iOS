@@ -60,10 +60,7 @@ class ViewController: UIViewController {
         operation.alertDelegate = self
         guard let buttonTitle = sender.currentTitle else { return }
         if buttonTitle == "=" {
-//            if !operation.isExpressionCorrect {
-//                return
-//            }
-            textView.text = textView.text + "=\(operation.calculateTotal())"
+            textView.text = textView.text + operation.calculateTotal()
         } else {
             textView.text = operation.addNewOperator(buttonTitle)
         }

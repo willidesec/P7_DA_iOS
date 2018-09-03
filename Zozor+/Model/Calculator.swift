@@ -79,7 +79,7 @@ class Calculator {
             }
         }
         clear()
-        return String(total)
+        return "=\(String(total))"
     }
     
     fileprivate func updateDisplay() -> String {
