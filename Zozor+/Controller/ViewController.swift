@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     let operation = Calculator()
     var memoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "I am the memory label"
+        label.text = ""
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 30)
