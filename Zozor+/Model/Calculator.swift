@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// A Protocol to display an alert in the Controller
 protocol AlertControllerDelegate {
     func displayAlert(message: String)
 }
@@ -43,6 +44,7 @@ class Calculator {
         }
         return true
     }
+    
     // MARK: - Methods
     public func addNewNumber(_ newNumber: Int) -> String {
         if let stringNumber = stringNumbers.last {
@@ -100,7 +102,7 @@ class Calculator {
         operators = ["+"]
     }
     
-    // Bonus
+    // Bonus: Add a memory to the calculator in order to re-use the result of the previous operation
     public func addResultToMemory(_ result: Int) -> String {
         memory = result
         return String(memory)
